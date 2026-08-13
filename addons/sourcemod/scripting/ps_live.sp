@@ -21,7 +21,7 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Version: $Id: ps_live.sp 564 2008-10-10 12:26:35Z lifo $
- * Author: Stormtrooper
+ * Author: Stormtrooper <http://www.psychostats.com/>
  * 
  */
 
@@ -86,7 +86,8 @@ public Plugin:myinfo = {
         name = "PsychoStats (PsychoLive) Plugin",
         author = "Stormtrooper",
         description = "Records game play for real-time and pre-recorded playback using PsychoLive from PsychoStats.",
-        version = "1.0"
+        version = "1.0",
+        url = "http://www.psychostats.com/"
 };
 
 public OnPluginStart() {
@@ -95,13 +96,11 @@ public OnPluginStart() {
 	// determine the mod playing by checking the game description. This way
 	// if the game folder is changed on a server it won't cause problems.
 	if (StrContains(game, "Counter-Strike") != -1) {
-		gamename = "cstrikes";
+		gamename = "cstrike";
 	} else if (StrContains(game, "Team Fortress") != -1) {
 		gamename = "tf2";
 	} else if (StrContains(game, "Day of Defeat") != -1) {
-		gamename = "dods";
-	} else if (StrContains(game, "Battle Grounds") != -1) {
-		gamename = "bg3";
+		gamename = "dod";
 	} else {
 		GetGameFolderName(gamename, sizeof(gamename));
 	}
@@ -139,7 +138,7 @@ public OnPluginStart() {
 		HookEvent("player_team", Event_player_team);
 		HookEvent("player_spawn", Event_player_spawn);
 		HookEvent("player_changename", Event_player_changename);
-		if (strcmp(gamename, "cstrikes") == 0) {
+		if (strcmp(gamename, "cstrike") == 0) {
 			HookEvent("bomb_pickup", Event_player_bomb);
 			HookEvent("bomb_dropped", Event_player_bomb);
 			HookEvent("bomb_planted", Event_player_bomb);
@@ -154,9 +153,7 @@ public OnPluginStart() {
 			HookEvent("teamplay_round_stalemate", Event_round);
 			HookEvent("player_builtobject", Event_player_built);
 			HookEvent("player_changeclass", Event_player_class);
-		} else if (strcmp(gamename, "dods") == 0) {
-			
-		} else if (strcmp(gamename, "bg3") == 0) {
+		} else if (strcmp(gamename, "dod") == 0) {
 			
 		}
 		
@@ -400,9 +397,9 @@ public Action:Event_player_hurt(Handle:event, const String:name[], bool:dontBroa
 //	new bool:hurtself = (victim_id == attacker_id);
 //	new bool:hurtteam = (!hurtself && GetClientTeam(victim) == GetClientTeam(attacker));
 	new dmg;
-	if (strcmp(gamename, "cstrikes") == 0 || strcmp(gamename, "tf2") == 0) {
+	if (strcmp(gamename, "cstrike") == 0 || strcmp(gamename, "tf2") == 0) {
 		dmg = GetEventInt(event, "dmg_health");
-	} else if (strcmp(gamename, "dods") == 0) {
+	} else if (strcmp(gamename, "dod") == 0) {
 		dmg = GetEventInt(event, "damage");
 	} else {
 		dmg = plr_stats[victim][PLR_HEALTH] - health;
@@ -616,7 +613,7 @@ public Action:Event_player_bomb(Handle:event, const String:name[], bool:dontBroa
 
 	new String:value[10] = "NULL";
 	new String:xyz[23] = "NULL";
-	if (strcmp(gamename, "cstrikes") == 0) {
+	if (strcmp(gamename, "cstrike") == 0) {
 		if (strcmp(name, "bomb_planted") == 0) {
 			// CSTRIKE: record the c4 timer so we can display a countdown
 			Format(value, sizeof(value), "'%d'", GetConVarInt(cv_c4timer));

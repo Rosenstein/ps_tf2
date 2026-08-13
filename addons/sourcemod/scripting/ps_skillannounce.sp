@@ -20,7 +20,7 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Version: $Id: ps_mapfix.sp 411 2008-04-23 18:07:12Z lifo $
- * Author: k1ller
+ * Author: k1ller <http://www.psychostats.com/>
  */
 
 new Handle:hDatabase = INVALID_HANDLE;
@@ -31,7 +31,8 @@ public Plugin:myinfo =
         name = "PsychoStats - Skill Announce",
         author = "k1ller",
         description = "PsychoStats real-time skill change tracker in-game",
-        version = "1.0"
+        version = "1.0",
+        url = "http://www.psychostats.com/"
 };
 
 public OnPluginStart()

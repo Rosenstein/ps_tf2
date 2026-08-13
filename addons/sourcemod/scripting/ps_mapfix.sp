@@ -23,7 +23,7 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Version: $Id: ps_mapfix.sp 411 2008-04-23 18:07:12Z lifo $
- * Author:  Stormtrooper
+ * Author:  Stormtrooper <http://www.psychostats.com/>
  */
 
 #pragma semicolon 1
@@ -39,7 +39,8 @@ public Plugin:myinfo =
         name = "PsychoStats - First Map Fix",
         author = "Stormtrooper",
         description = "PsychoStats first map logging fix",
-        version = "1.01"
+        version = "1.01",
+        url = "http://www.psychostats.com/"
 };
 
 public OnPluginStart()
